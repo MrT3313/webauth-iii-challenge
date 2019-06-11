@@ -4,6 +4,10 @@
 // KNEX DB
     const DB_KNEX = require('../../data/dbConfig')
 
+// MIDDLEWARE
+    const pwHash = require('../middleware/pwHash')
+    
+
 // ROUTER
     const router = express.Router()
 
@@ -17,15 +21,16 @@
         }
     */
 
-    router.post('/', async(req,res) => {
+    router.post('/', pwHash, async(req,res) => {
         console.log('postRouter post/')
         
         const passedNewUser = req.body
 
         DB_KNEX('USERS')
-            .then( res => {
-                console.log( res )
-                res.status(200).json( res )
+            .insert(passedNewUser)
+            .then( result => {
+                console.log( result )
+                res.status(200).json( result )
             })
             .catch( err => {
                 res.status(500).json( { error: 'Unable to INSERT new User into USERS table'} )

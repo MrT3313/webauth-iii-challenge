@@ -3,7 +3,8 @@
 
 // ROUTERS
     const registerRouter = require('./Routers/registerRouter.js')
-
+    const usersRouter = require('./Routers/usersRouter.js')
+    
 
 // SERVER
     const server = express()
@@ -16,6 +17,7 @@
 
 // INDIVIDUAL ROUTS
     server.use('/api/register', registerRouter)
+    server.use('/api/users', usersRouter)
 
 // EXPORTS
     module.exports = server
