@@ -4,12 +4,15 @@
 // KNEX DB
     const DB_KNEX = require('../../data/dbConfig')
 
+    // MIDDLEWARE
+    const protectRoute = require('../middleware/protectRoute.js')
+
 // ROUTER
 const router = express.Router()
 
 // ROUTER
     // - GET - //
-    router.get('/', async(req,res) => {
+    router.get('/', protectRoute, async(req,res) => {
         console.log('usersRouter get/')
         
         DB_KNEX('USERS')

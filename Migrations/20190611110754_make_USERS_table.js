@@ -5,6 +5,7 @@ exports.up = async function(knex) {
             .increments('id')
         table
             .string('name')
+            .unique()
             .notNullable()
         table
             .string('password')
