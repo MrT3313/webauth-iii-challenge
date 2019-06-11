@@ -2,6 +2,9 @@
     const express = require('express')
     const bcrypt = require('bcrypt')
 
+    const jwt = require('jsonwebtoken')
+    
+
 // KNEX DB
     const DB_KNEX = require('../../data/dbConfig')
 
@@ -24,7 +27,21 @@
                     console.log(pwVerification)
                     
                 if (user && pwVerification) {
-                    res.status(200).json( {message: `Welcome ${name}`} )
+                    // Prepare JWT
+                    jwt.sign({
+                        userID: user.id,
+
+                    }, 'super secret string', (err, token) => {
+                        if (err) {
+                            res.status(401).json( {message: 'Could not generate token'} )
+                        } else {
+                            res.status(200).json( {
+                                message: `Welcome ${name}`,
+                                authToken: token
+                            } )
+                        }
+                    })
+
                 }
             })
             .catch( err => {
