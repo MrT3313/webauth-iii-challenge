@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/MrT3313/webauth-iii-challenge#readme",
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "knex-cleaner": "^1.1.4"
   },
   "dependencies": {
     "express": "^4.17.1",
