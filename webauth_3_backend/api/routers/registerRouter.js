@@ -7,6 +7,10 @@
 // ROUTER
     const router = express.Router()
 
+// MIDDLEWARE
+    const pwHash = require('../middleware/pwHash')
+    
+
 // - GET - //
     router.get('/', async(req,res) => {
         console.log('registerRouter get/')
@@ -19,7 +23,7 @@
             "password": "STRING"
         } 
     */ 
-    router.post("/", async(req,res) => {
+    router.post("/", pwHash, async(req,res) => {
         console.log('registerRouter POST/')
         console.log('req.body', req.body)
 
