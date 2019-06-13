@@ -2,12 +2,14 @@
     const express = require('express')
 
 // ROUTERS
-    const loginRouter = require('./routers/loginRouter')
+    const registerRouter = require('./routers/registerRouter')
+    // const loginRouter = require('./routers/loginRouter')
     const usersRouter = require('./routers/usersRouter')
     
 
 // SERVER
     const server = express()
+    server.use(express.json())
 
 // HOMEPAGE ROUTING
     server.get('/', async(req,res) => {
@@ -15,7 +17,8 @@
     })
 
 // INDIVIDUAL ROUTES
-    server.use('/api/login', loginRouter)
+    server.use('/api/register', registerRouter)
+    // server.use('/api/login', loginRouter)
     server.use('/api/users', usersRouter)
 
 // EXPORTS
