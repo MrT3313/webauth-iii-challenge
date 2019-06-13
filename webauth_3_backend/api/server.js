@@ -3,7 +3,7 @@
 
 // ROUTERS
     const registerRouter = require('./routers/registerRouter')
-    // const loginRouter = require('./routers/loginRouter')
+    const loginRouter = require('./routers/loginRouter')
     const usersRouter = require('./routers/usersRouter')
     
 
@@ -18,7 +18,7 @@
 
 // INDIVIDUAL ROUTES
     server.use('/api/register', registerRouter)
-    // server.use('/api/login', loginRouter)
+    server.use('/api/login', loginRouter)
     server.use('/api/users', usersRouter)
 
 // EXPORTS
