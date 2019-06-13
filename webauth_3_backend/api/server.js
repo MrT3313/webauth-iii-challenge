@@ -1,5 +1,6 @@
 // EXPRESS
     const express = require('express')
+    var cors = require('cors');
 
 // ROUTERS
     const registerRouter = require('./routers/registerRouter')
@@ -10,6 +11,7 @@
 // SERVER
     const server = express()
     server.use(express.json())
+    server.use(cors())
 
 // HOMEPAGE ROUTING
     server.get('/', async(req,res) => {
