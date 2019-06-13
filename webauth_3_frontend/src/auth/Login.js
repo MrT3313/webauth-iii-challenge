@@ -1,24 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class Login extends React.Component {
-    // State //
+    // -- STATE -- //
     state = {
         userName: "",
         password: ""
     }
 
-    // Methods //
-    formSubmit_handler = e => {
-        e.preventDefault();
-        console.log('you clicked the form button!')
-    }
-    inputChange_handler = e => {
-        e.preventDefault();
-        console.log('inside input change handler')
-
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
+    // -- RENDER -- //
     render() {
         return (
             <div>
@@ -28,16 +18,43 @@ export default class Login extends React.Component {
                         name="userName"
                         placeholder='userName'
                         onChange={this.inputChange_handler}
+                        value={this.state.userName}
                     ></input>
                     <input
                         type='password'
                         name="password"
                         placeholder='password'
                         onChange={this.inputChange_handler}
+                        value={this.state.password}
                     ></input>
                     <button>Click</button>
                 </form>
             </div>
         )
     }
+
+    // -- METHODS -- //
+        inputChange_handler = e => {
+            e.preventDefault();
+            console.log('inside input change handler')
+
+            this.setState({ [e.target.name]: e.target.value });
+        }
+        formSubmit_handler = e => {
+            e.preventDefault();
+            console.log('you clicked the form button!')
+            
+            const PORT = 5000
+            const endpoint = `http://localhost:${PORT}/api/login`
+
+            axios
+                .post(endpoint, this.state)
+                .then( res => {
+                    console.log('res', res )
+                    
+                })
+                .catch( err => {
+                    console.log('login error')
+                })
+        }
 }
