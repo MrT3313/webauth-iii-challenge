@@ -2,6 +2,7 @@
     const express = require('express')
     const bcrypt = require('bcrypt')
 
+    const secrets = require('../../config/secrets.js')
     const jwt = require('jsonwebtoken')
     
 
@@ -10,6 +11,8 @@
 
 // ROUTER
     const router = express.Router()
+
+// Functions
 
 // ROUTER
     // - POST - //
@@ -30,18 +33,22 @@
                     // Prepare JWT
                     jwt.sign({
                         userID: user.id,
-
-                    }, 'super secret string', (err, token) => {
+                    }, secrets.jwtSecret, {
+                        expiresIn: '3h',
+                    }, (err, token) => {
+                        console.log('token', token)
                         if (err) {
                             res.status(401).json( {message: 'Could not generate token'} )
                         } else {
-                            res.status(200).json( {
+                            // WHY ISNT THE TOKEN BEING SAVED ANYWHERE!!!
+
+                            console.log('THIS IS THE TOKEN', token)
+                            res.status(201).json({
                                 message: `Welcome ${name}`,
-                                authToken: token
-                            } )
+                                authToken: token,
+                            })
                         }
                     })
-
                 }
             })
             .catch( err => {
