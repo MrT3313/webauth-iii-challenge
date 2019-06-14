@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
     // -- STATE -- //
     state = {
         userName: "",
@@ -13,8 +13,8 @@ export default class Login extends React.Component {
         return (
             <div>
                 <div className='title'>
-                    Welcome Back Friend! I CANT WAIT FOR YOU TO LOG IN!!!
-                </div>
+                    Complete form to complete registration!
+                </div> 
                 <form onSubmit={this.formSubmit_handler} >
                     <input
                         type='text'
@@ -45,10 +45,10 @@ export default class Login extends React.Component {
         }
         formSubmit_handler = e => {
             e.preventDefault();
-            console.log('you clicked the form button!')
-            
+            console.log('YOU CLICKED FOR REGISTER FORM BUTTON')
+
             const PORT = 9000
-            const endpoint = `http://localhost:${PORT}/api/login`
+            const endpoint = `http://localhost:${PORT}/api/Register`
 
             axios
                 .post(endpoint, this.state)
@@ -57,7 +57,8 @@ export default class Login extends React.Component {
                     
                 })
                 .catch( err => {
-                    console.log('login error')
+                
                 })
+
         }
 }
