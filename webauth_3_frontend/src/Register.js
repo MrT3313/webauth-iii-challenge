@@ -1,11 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+import api from './helpers/baseURL_axios'
 
 export default class Register extends React.Component {
     // -- STATE -- //
     state = {
         userName: "",
-        password: ""
+        password: "",
+        department: "",
     }
 
     // -- RENDER -- //
@@ -30,6 +31,13 @@ export default class Register extends React.Component {
                         onChange={this.inputChange_handler}
                         value={this.state.password}
                     ></input>
+                    <input
+                        type='test'
+                        name="department"
+                        placeholder='department'
+                        onChange={this.inputChange_handler}
+                        value={this.state.department}
+                    ></input>
                     <button>Click</button>
                 </form>
             </div>
@@ -43,22 +51,15 @@ export default class Register extends React.Component {
 
             this.setState({ [e.target.name]: e.target.value });
         }
-        formSubmit_handler = e => {
+        formSubmit_handler = async e => {
             e.preventDefault();
             console.log('YOU CLICKED FOR REGISTER FORM BUTTON')
 
-            const PORT = 9000
-            const endpoint = `http://localhost:${PORT}/api/Register`
-
-            axios
-                .post(endpoint, this.state)
-                .then( res => {
-                    console.log('res', res )
-                    
-                })
-                .catch( err => {
-                
-                })
-
+            try {
+                const result = await api.post('/register', this.state)
+                console.log('result', result)
+            } catch {
+                console.log({ error: 'unable to Register'})
+            }
         }
 }

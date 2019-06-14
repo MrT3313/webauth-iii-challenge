@@ -5,6 +5,7 @@
 // COMPONENTS
   import Login from './auth/Login';
   import Register from './Register';
+  import Users from './Users';
 
 function App() {
   return (
@@ -13,10 +14,17 @@ function App() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/register">SignUp</NavLink>
         <NavLink to="/login">Login</NavLink>
+        <NavLink to="/users">Users</NavLink>
       </header>
+      <div className='APP CONTENT'>
+        {localStorage.getItem('token')}
+      </div>
+      
+
       <main>
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path="/Users" component={Users} />
       </main>
     </div>
   );

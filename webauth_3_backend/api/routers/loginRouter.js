@@ -44,7 +44,8 @@
 
                         res.status(200).json({
                             message: `Welcome ${userName}`, 
-                            token
+                            user: user.id,
+                            token,
                         })
                     } else {
                         res.status(401).json( { error: 'Unable to Login'} )

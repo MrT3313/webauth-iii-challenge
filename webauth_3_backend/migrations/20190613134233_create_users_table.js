@@ -7,6 +7,7 @@ exports.up = async function(knex) {
             .notNullable()
         tbl.string('password')
             .notNullable()
+        tbl.string('department')
     })
 }
 exports.down = async function(knex) {

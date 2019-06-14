@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+
+import api from '../helpers/baseURL_axios.js'
 
 export default class Login extends React.Component {
     // -- STATE -- //
@@ -43,21 +44,24 @@ export default class Login extends React.Component {
 
             this.setState({ [e.target.name]: e.target.value });
         }
-        formSubmit_handler = e => {
+        formSubmit_handler = async e => {
             e.preventDefault();
             console.log('you clicked the form button!')
             
-            const PORT = 9000
-            const endpoint = `http://localhost:${PORT}/api/login`
+            try {                
+                const result = await api.post('/login', {
+                    userName: this.state.userName,
+                    password: this.state.password 
+                })
 
-            axios
-                .post(endpoint, this.state)
-                .then( res => {
-                    console.log('res', res )
-                    
-                })
-                .catch( err => {
-                    console.log('login error')
-                })
+                console.log('result', result)
+
+                document.cookie = `token=${result.data.token}`
+                localStorage.setItem('token', result.data.token)
+                localStorage.setItem('userID', result.data.user)
+
+            } catch {
+                console.log( { error: 'Unable to do your request'} )
+            }
         }
 }
